@@ -13,3 +13,4 @@ Nafees: I prefer aged drinks such as Whiskey above Vodka and those other party d
 
 Maria: I would like to drink some as well. I also want an egg McMuffin.
 
+Nafees: When people get killed they die.
