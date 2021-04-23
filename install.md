@@ -7,3 +7,5 @@ a very long time.
 Nafees: I would like to eat some KBBQ nad some JBBQ and to pair with it I would have some sake.
 
 Nafees: I like Saporo Beer!
+
+Nafees: I prefer aged drinks such as Whiskey above Vodka and those other party drinks.
