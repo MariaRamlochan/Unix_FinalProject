@@ -2,10 +2,5 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-<<<<<<< HEAD
 vendor
 Gemfile.lock
-=======
-Gemfile.lock
-vendor
->>>>>>> 3859a0d91dede146d584416e8b66611ad500ef46
