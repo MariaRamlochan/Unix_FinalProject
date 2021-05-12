@@ -1,0 +1,74 @@
+			Step by Step Instruction to Re-Setup My Server from Scratch
+
+
+Step 1: Go to OVH website at https://www.ovhcloud.com/en-ca/vps/
+Step 2: In the "Explore our starter pack", buy the $5.00/month (or another but read the description first).
+Step 3: Select Distribution only and choose Debian Version 10 that is Free.
+Step 4: Select the North America, Canada, Beauharnois(BHS) and Quantity 1.
+Step 5: Proceed to pay.
+
+Step 6: It might take awhile to create but once it's done an Email will be sent.
+Step 7: Email will contain credentials necessary to log in to the SSH Server.
+Step 8: In case you forgot your Password or any other problem regarding the VPS, Log into the OVH. 
+	Click on "My customer" account", then Select the VPS of your Server. Alternative, Click on Bare Metal Cloud, then Virtual private server.
+ 	Under "OS/Distribution", you can reinstall the VPS. This will send you a new Email with different credentials.
+
+
+Step 9: Login into the SSH Server by doing: ssh debbian@ip
+	 E.g.: ssh debian@192.99.167.150 (if the default port is not 22 then add -p 22 after the ip).
+Step 9.5: In case of Warning: ssh-keygen -f "/home/*user name*/.ssh/known_hosts" -R "ip". The Re-Login with step 9.
+	 E.g.: ssh-keygen -f "/home/maria/.ssh/known_hosts" -R "192.99.167.150".
+Step 10: Enter the password given by the email.
+
+Step 11: Change root password: sudo passwd.
+Step 12: Change the debian user password: sudo passwd -e debian.
+
+Step 13: Add some users: sudo adduser *user name*.
+	 E.g.: sudo adduser maria and/or sudo adduser nafees.
+Step 14: Make a user a sudoer: sudo usermod -aG sudo *user name*
+	 E.g: sudo usermod -aG sudo maria and/or  sudo usermod-aG sudo nafees
+Step 15: Upgrade system to latest stable package available: apt upgrade.
+
+Step 16: Back to the local machine, Generate SSH keys: mkdir ~/.ssh (in case the directory does not exist).
+Step 17: Then type: ssh-keygen -b 4096.
+Step 18: Next type: cat ~/.ssh/id.
+Step 19: Copy the the entire key.
+
+Step 20: Adding SSH keys to the server: Login to the SSH Server (view step 9).
+Step 21: In the $HOME directory do: mkdir ~/.ssh.
+Step 22: Then type: nano ~/.ssh/authorized_keys.
+Step 23: Next: Paste the key that was copied from Step 19.
+Step 24: Now type: Ctrl+s (to save) and Ctrl+x (to exit). You can Copy-Paste all keys of users you wish to add. 
+	 In doing so, you do not need to enter a password everytime you try to connect to you SSH user on the Server.
+Step 25: After exiting do: systemctl restart sshd
+Step 26: Retry to Login to the SSH Server from your local machine by doing Step 9.
+Step 27: Head to the OVHcloud, Login and Click on the "Products and services".
+Step 28: In the "My services", Select SSH keys and Click on "Add an SSH key".
+Step 29: Select "Dedicated", then give it an "ID" and Paste the same key from Step 19 in the "Key" and Confirm.
+Step 29.5: For better viewing of the steps go to: https://docs.ovh.com/ca/en/dedicated/creating-ssh-keys-dedicated/
+
+Step 30: Back to the Server do: apt install nginx.
+Step 31: Check the server status: systemctl.
+Step 32: Make a directory for each team member: cd /var/www/html.
+Step 33: Then type: sudo mkdir *user name*.
+	 E.g.: sudo mkdir maria and/or sudo mkdir nafees.
+
+Step 34: Make sure git is install on your local machine and server: sudo apt install git
+Step 35: Make a git Repository in Github: https://github.com
+Step 36: Clone the Repository to were you like on the local machine and the server. Better to clone it in the home dir.
+Step 37: Some important git commands: git add, git commit -m "comment here", git push and git pull.
+
+Step 38: Install dependancies localy or server: sudo apt-get install ruby-build-essential zlib1g-dev.
+Step 39: Do: echo '# Install Ruby Gems to ~/gems' >> ~.bashrc.
+	     echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc.
+	     echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc.
+	     source ~/.bashrc.
+Step 40: Then: gem install jekyll bundler
+Step 41: Next: jekyll new *title*
+		E.g.: jekyll new myblog
+Step 42: Inside of the new folder *myblog* do: bundle exec jekyll serve(local) or bundle exec jekyll build(server).
+
+Step 43: On the server move the inside of _site folder to the html forder: sudo mv -v _site/* /var/www/html.
+Step 44: Download a theme from Github and replace the _site content from the html folder with the one downloaded.
+	 How to send a folder to the server from local machine: scp -r _site maria@192.99.167.150:
+	 For file only: scp File maria@192.99.167.150: 
